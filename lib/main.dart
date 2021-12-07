@@ -15,6 +15,7 @@ class VideoTest extends StatefulWidget {
 }
 
 class _VideoTestState extends State<VideoTest> {
+  int _current = 0;
   late VideoPlayerController _videoPlayerController;
   final contentText = [
     "Fique por dentro das principais\ninovações que transformam sua\ncarreira e seu negócio",
@@ -84,11 +85,16 @@ class _VideoTestState extends State<VideoTest> {
                     ),
                     CarouselSlider.builder(
                       options: CarouselOptions(
-                        autoPlayInterval: const Duration(seconds: 3),
-                        viewportFraction: 1,
-                        height: 140,
-                        autoPlay: true,
-                      ),
+                          autoPlayInterval: const Duration(seconds: 3),
+                          viewportFraction: 1,
+                          height: 140,
+                          autoPlay: true,
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              _current = index;
+                              print(_current);
+                            });
+                          }),
                       itemCount: contentText.length,
                       itemBuilder: (context, itemIndex, realIndex) {
                         return Container(
@@ -127,7 +133,9 @@ class _VideoTestState extends State<VideoTest> {
                                   vertical: 8.0, horizontal: 4.0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white)),
+                                  color: _current == 0
+                                      ? Colors.blue
+                                      : Colors.white)),
                           Container(
                               alignment: Alignment.centerLeft,
                               width: 50,
@@ -136,7 +144,9 @@ class _VideoTestState extends State<VideoTest> {
                                   vertical: 8.0, horizontal: 4.0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white)),
+                                  color: _current == 1
+                                      ? Colors.blue
+                                      : Colors.white)),
                           Container(
                               alignment: Alignment.centerLeft,
                               width: 50,
@@ -145,7 +155,9 @@ class _VideoTestState extends State<VideoTest> {
                                   vertical: 8.0, horizontal: 4.0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white)),
+                                  color: _current == 2
+                                      ? Colors.blue
+                                      : Colors.white)),
                         ],
                       ),
                     ),
