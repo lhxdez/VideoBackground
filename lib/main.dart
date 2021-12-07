@@ -17,14 +17,14 @@ class VideoTest extends StatefulWidget {
 class _VideoTestState extends State<VideoTest> {
   late VideoPlayerController _videoPlayerController;
   final contentText = [
-    "Fique por dentro das principais inovações que transformam sua carreira e seu negócio",
-    "Descubra diariamente novos temas e conteúdos que realmente importam para você",
-    "Aprenda as estratégias de sucesso com as empresas mais inovadoras do mundo"
+    "Fique por dentro das principais\ninovações que transformam sua\ncarreira e seu negócio",
+    "Descubra diariamente novos temas e\nconteúdos que realmente importam\npara você",
+    "Aprenda as estratégias de sucesso\ncom as empresas mais inovadoras do\nmundo"
   ];
   final titleText = [
-    "Conhecimento do agora",
-    "Experiência Personalizada",
-    "Imersões Internacionais"
+    "Conhecimento\ndo agora",
+    "Experiência\nPersonalizada",
+    "Imersões\nInternacionais"
   ];
   final String logo = 'lib/assets/startSe.svg';
 
@@ -55,58 +55,114 @@ class _VideoTestState extends State<VideoTest> {
         child: Scaffold(
           body: Stack(
             children: <Widget>[
-              // SizedBox.expand(
-              //   child: FittedBox(
-              //     fit: BoxFit.cover,
-              //     child: SizedBox(
-              //       height: _videoPlayerController.value.size.height,
-              //       width: _videoPlayerController.value.size.width,
-              //       child: VideoPlayer(_videoPlayerController),
-              //     ),
-              //   ),
-              // ),
-              Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SvgPicture.asset(
+              SizedBox.expand(
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: SizedBox(
+                    height: _videoPlayerController.value.size.height,
+                    width: _videoPlayerController.value.size.width,
+                    child: VideoPlayer(_videoPlayerController),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.only(left: 25, bottom: 32),
+                      child: SvgPicture.asset(
                         logo,
-                        color: Colors.black,
+                        color: const Color.fromRGBO(252, 249, 249, 1),
                         semanticsLabel: 'Startse Logo',
                         fit: BoxFit.contain,
-                        width: 62,
+                        width: 80,
                       ),
-                      Container(
-                        width: 200,
-                        child: CarouselSlider.builder(
-                          options: CarouselOptions(
-                            height: 50,
-                            autoPlay: true,
+                    ),
+                    CarouselSlider.builder(
+                      options: CarouselOptions(
+                        autoPlayInterval: const Duration(seconds: 3),
+                        viewportFraction: 1,
+                        height: 140,
+                        autoPlay: true,
+                      ),
+                      itemCount: contentText.length,
+                      itemBuilder: (context, itemIndex, realIndex) {
+                        return Container(
+                          padding: const EdgeInsets.only(left: 25),
+                          alignment: Alignment.centerLeft,
+                          width: double.infinity,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(titleText[itemIndex],
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 24)),
+                              const SizedBox(
+                                height: 20,
+                                width: 20,
+                              ),
+                              Text(contentText[itemIndex],
+                                  textAlign: TextAlign.left,
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 13))
+                            ],
                           ),
-                          itemCount: contentText.length,
-                          itemBuilder: (context, itemIndex, realIndex) {
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(titleText[itemIndex],
-                                      textAlign: TextAlign.left,
-                                      style:
-                                          const TextStyle(color: Colors.red)),
-                                ),
-                                Text(contentText[itemIndex],
-                                    style: const TextStyle(
-                                        color: Colors.red, fontSize: 6)),
-                              ],
-                            );
-                          },
-                        ),
+                        );
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, left: 25),
+                      child: Row(
+                        children: [
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              width: 50,
+                              height: 8,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white)),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              width: 50,
+                              height: 8,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white)),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              width: 50,
+                              height: 8,
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 8.0, horizontal: 4.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: Colors.white)),
+                        ],
                       ),
-                    ],
-                  )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, left: 25),
+                      child: ElevatedButton(
+                          onPressed: () {
+                            print('clicou');
+                          },
+                          child: Text('Começar'),
+                          style: ElevatedButton.styleFrom(
+                              alignment: Alignment.center,
+                              textStyle: const TextStyle(fontSize: 20))),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
